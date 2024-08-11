@@ -12,8 +12,9 @@ public class CartPage {
     private final String totalCartPrice = "//span[contains(@data-link, 'basketPriceWithCurrencyV2')]";
     private final String orderButton = "//button[@class='b-btn-do-order btn-main j-btn-confirm-order']";
 
-    public void openCart() {
+    public CartPage openCart() {
         $(cartIcon).click();
+        return this;
     }
 
     public String getProductNameInCart() {
@@ -28,11 +29,13 @@ public class CartPage {
         return $x(totalCartPrice).getText().trim();
     }
 
-    public void verifyOrderButtonVisibleAndEnabled() {
+    public CartPage verifyOrderButtonVisibleAndEnabled() {
         $x(orderButton).shouldBe(visible).shouldBe(enabled);
+        return this;
     }
 
-    public void verifyProductAddedToCart(int expectedItems) {
+    public CartPage verifyProductAddedToCart(int expectedItems) {
         $(cartNotification).shouldHave(text(String.valueOf(expectedItems)));
+        return this;
     }
 }

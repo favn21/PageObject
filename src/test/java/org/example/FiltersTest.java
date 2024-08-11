@@ -20,21 +20,22 @@ public class FiltersTest {
 
         sleep(10000);
 
-        electronicsPage.selectElectronics();
-        electronicsPage.selectLaptops();
-        electronicsPage.selectUltrabooks();
+        electronicsPage.selectElectronics()
+                .selectLaptops()
+                .selectUltrabooks();
+        sleep(30000);
+        filtersPage.openAllFilters()
+                .setPriceRange("100000", "149000")
+                .selectAppleBrand()
+                .selectDeliveryWithinFiveDays();
+        sleep(10000);
+        filtersPage.selectScreenSize13_3()
+                .applyFilters()
+                .verifyFilterApplied("от 100 000 до 149 000")
+                .verifyFilterApplied("до 5 дней")
+                .verifyFilterApplied("13.3")
+                .verifyFilterApplied("Apple");
 
-        filtersPage.openAllFilters();
-        filtersPage.setPriceRange("100000", "149000");
-        filtersPage.selectAppleBrand();
-        filtersPage.selectDeliveryWithinFiveDays();
-        filtersPage.selectScreenSize13_3();
-        filtersPage.applyFilters();
-
-        filtersPage.verifyFilterApplied("от 100 000 до 149 000");
-        filtersPage.verifyFilterApplied("до 5 дней");
-        filtersPage.verifyFilterApplied("Apple");
-        filtersPage.verifyFilterApplied("13.3");
 
         int totalItems = filtersPage.getTotalItemsCount();
         filtersPage.verifyTotalItemsCount(totalItems);

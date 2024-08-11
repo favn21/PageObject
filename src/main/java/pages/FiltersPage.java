@@ -13,33 +13,40 @@ public class FiltersPage {
     private final String screenSizeCheckbox = "//span[contains(@class, 'checkbox-with-text__text') and contains(text(), '13.3')]";
     private final String showButton = "//button[contains(@class, 'filters-desktop__btn-main') and contains(text(), 'Показать')]";
 
-    public void openAllFilters() {
+    public FiltersPage openAllFilters() {
         $(allFiltersButton).click();
+        return this;
     }
 
-    public void setPriceRange(String minPrice, String maxPrice) {
+    public FiltersPage setPriceRange(String minPrice, String maxPrice) {
         $x(priceMinInput).setValue(minPrice);
         $x(priceMaxInput).setValue(maxPrice);
+        return this;
     }
 
-    public void selectAppleBrand() {
+    public FiltersPage selectAppleBrand() {
         $x(appleCheckbox).click();
+        return this;
     }
 
-    public void selectDeliveryWithinFiveDays() {
+    public FiltersPage selectDeliveryWithinFiveDays() {
         $x(deliveryCheckbox).click();
+        return this;
     }
 
-    public void selectScreenSize13_3() {
+    public FiltersPage selectScreenSize13_3() {
         $x(screenSizeCheckbox).click();
+        return this;
     }
 
-    public void applyFilters() {
+    public FiltersPage applyFilters() {
         $x(showButton).click();
+        return this;
     }
 
-    public void verifyFilterApplied(String filterText) {
+    public FiltersPage verifyFilterApplied(String filterText) {
         $x("//span[@class='your-choice__btn' and contains(text(), '" + filterText + "')]").shouldBe(visible);
+        return this;
     }
 
     public int getTotalItemsCount() {
@@ -47,11 +54,13 @@ public class FiltersPage {
         return Integer.parseInt(totalItemsText.replaceAll("[^0-9]", ""));
     }
 
-    public void verifyTotalItemsCount(int expectedCount) {
+    public FiltersPage verifyTotalItemsCount(int expectedCount) {
         $$("div.product-card__wrapper").shouldHave(CollectionCondition.size(expectedCount));
+        return this;
     }
 
-    public void verifyResetButtonVisible() {
+    public FiltersPage verifyResetButtonVisible() {
         $x("//li[contains(@class, 'your-choice__item--reset')]//button[contains(@class, 'your-choice__btn') and contains(text(), 'Сбросить все')]").shouldBe(visible);
+        return this;
     }
 }

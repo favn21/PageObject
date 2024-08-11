@@ -18,23 +18,23 @@ public class CityChangeTest {
     public void testCityChange() {
         WebDriverConfig.setUp();
         HomePage homePage = new HomePage().openPage();
+        sleep(20000);
         homePage.openCitySelection();
 
-        sleep(60000);
+        sleep(70000);
 
         citySelectionPage.searchForCity("Санкт-Петербург");
         sleep(20000);
 
-        citySelectionPage.selectFirstAddress();
-        citySelectionPage.confirmCitySelection();
+        citySelectionPage.selectFirstAddress()
+                .confirmCitySelection();
         String productPrice = productPage.getFirstProductPrice();
         String productName = productPage.selectFirstProductAndGetName();
 
         productPage.addToBasket();
 
-        cartPage.verifyProductAddedToCart(1);
-
-        cartPage.openCart();
+        cartPage.verifyProductAddedToCart(1)
+                .openCart();
 
         String productNameInCart = cartPage.getProductNameInCart();
         String productPriceInCart = cartPage.getProductPriceInCart();
@@ -43,5 +43,6 @@ public class CityChangeTest {
         String totalCartPrice = cartPage.getTotalCartPrice();
 
         cartPage.verifyOrderButtonVisibleAndEnabled();
+
     }
 }

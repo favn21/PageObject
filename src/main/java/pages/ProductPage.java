@@ -27,9 +27,10 @@ public class ProductPage {
         return $x(productPrice).getText().trim();
     }
 
-    public void addToBasket() {
+    public ProductPage addToBasket() {
         SelenideElement addToBasketBtn = $x(addToBasketButton);
         ((JavascriptExecutor) WebDriverRunner.getWebDriver()).executeScript("arguments[0].scrollIntoView(true);", addToBasketBtn);
         ((JavascriptExecutor) WebDriverRunner.getWebDriver()).executeScript("arguments[0].click();", addToBasketBtn);
+        return this;
     }
 }

@@ -22,10 +22,12 @@ public class HomePage {
         searchInput.setValue(productName).pressEnter();
         return new SearchResultsPage();
     }
-    public void openBurgerMenu() {
+    public HomePage openBurgerMenu() {
         $(burgerMenuButton).click();
+        return this;
     }
-    public void openCitySelection() {
+    public HomePage openCitySelection() {
         $x(citySelectionButton).click();
+        return this;
     }
 }

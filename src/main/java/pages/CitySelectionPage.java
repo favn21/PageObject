@@ -8,15 +8,18 @@ public class CitySelectionPage {
     private final String firstAddressOption = ".address-item.j-poo-option";
     private final String selectButton = "button.details-self__btn.btn-main";
 
-    public void searchForCity(String cityName) {
+    public CitySelectionPage searchForCity(String cityName) {
         $(searchInput).setValue(cityName).pressEnter();
+        return this;
     }
 
-    public void selectFirstAddress() {
+    public CitySelectionPage selectFirstAddress() {
         $$(firstAddressOption).first().click();
+        return this;
     }
 
-    public void confirmCitySelection() {
+    public CitySelectionPage confirmCitySelection() {
         $(selectButton).click();
+        return this;
     }
 }
