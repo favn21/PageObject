@@ -9,27 +9,25 @@ import pages.HomePage;
 import static com.codeborne.selenide.Selenide.*;
 
 public class FiltersTest {
+    HomePage homePage = new HomePage();
     ElectronicsPage electronicsPage = new ElectronicsPage();
     FiltersPage filtersPage = new FiltersPage();
 
     @Test
     public void testFilters() {
         WebDriverConfig.setUp();
-        HomePage homePage = new HomePage().openPage();
-        homePage.openBurgerMenu();
-
-        sleep(10000);
+        homePage.openPage()
+            .openBurgerMenu();
 
         electronicsPage.selectElectronics()
                 .selectLaptops()
                 .selectUltrabooks();
-        sleep(30000);
+
         filtersPage.openAllFilters()
                 .setPriceRange("100000", "149000")
                 .selectAppleBrand()
-                .selectDeliveryWithinFiveDays();
-        sleep(10000);
-        filtersPage.selectScreenSize13_3()
+                .selectDeliveryWithinFiveDays()
+                .selectScreenSize13_3()
                 .applyFilters()
                 .verifyFilterApplied("от 100 000 до 149 000")
                 .verifyFilterApplied("до 5 дней")
@@ -38,9 +36,8 @@ public class FiltersTest {
 
 
         int totalItems = filtersPage.getTotalItemsCount();
-        filtersPage.verifyTotalItemsCount(totalItems);
-
-        filtersPage.verifyResetButtonVisible();
+        filtersPage.verifyTotalItemsCount(totalItems)
+                .verifyResetButtonVisible();
 
         closeWebDriver();
     }

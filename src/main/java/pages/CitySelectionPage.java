@@ -10,6 +10,7 @@ public class CitySelectionPage {
 
     public CitySelectionPage searchForCity(String cityName) {
         $(searchInput).setValue(cityName).pressEnter();
+        sleep(20000);
         return this;
     }
 

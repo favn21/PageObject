@@ -31,6 +31,7 @@ public class FiltersPage {
 
     public FiltersPage selectDeliveryWithinFiveDays() {
         $x(deliveryCheckbox).click();
+        sleep(10000);
         return this;
     }
 

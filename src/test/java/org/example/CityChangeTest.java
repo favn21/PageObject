@@ -7,9 +7,8 @@ import pages.CitySelectionPage;
 import pages.HomePage;
 import pages.ProductPage;
 
-import static com.codeborne.selenide.Selenide.*;
-
 public class CityChangeTest {
+    HomePage homePage = new HomePage();
     CitySelectionPage citySelectionPage = new CitySelectionPage();
     ProductPage productPage = new ProductPage();
     CartPage cartPage = new CartPage();
@@ -17,16 +16,12 @@ public class CityChangeTest {
     @Test
     public void testCityChange() {
         WebDriverConfig.setUp();
-        HomePage homePage = new HomePage().openPage();
-        sleep(20000);
-        homePage.openCitySelection();
+        homePage.openPage()
+            .openCitySelection();
 
-        sleep(70000);
 
-        citySelectionPage.searchForCity("Санкт-Петербург");
-        sleep(20000);
-
-        citySelectionPage.selectFirstAddress()
+        citySelectionPage.searchForCity("Санкт-Петербург")
+                .selectFirstAddress()
                 .confirmCitySelection();
         String productPrice = productPage.getFirstProductPrice();
         String productName = productPage.selectFirstProductAndGetName();

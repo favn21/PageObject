@@ -16,11 +16,13 @@ public class SearchResultsPage {
 
     public SearchResultsPage verifyFirstProductBrand(String expectedBrand) {
         firstProductBrand.shouldHave(text(expectedBrand));
+        sleep(30000);
         return this;
     }
 
     public HomePage clearSearch() {
         clearSearchButton.click();
+        sleep(10000);
         return new HomePage();
     }
 }

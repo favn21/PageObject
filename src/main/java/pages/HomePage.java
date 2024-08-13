@@ -5,6 +5,7 @@ import static com.codeborne.selenide.Condition.empty;
 import static com.codeborne.selenide.Selenide.*;
 
 public class HomePage {
+
     private SelenideElement searchInput = $("#searchInput");
     private final String burgerMenuButton = "button.nav-element__burger.j-menu-burger-btn.j-wba-header-item";
     private final String citySelectionButton = "//span[@data-wba-header-name='DLV_Adress']";
@@ -24,10 +25,12 @@ public class HomePage {
     }
     public HomePage openBurgerMenu() {
         $(burgerMenuButton).click();
+        sleep(10000);
         return this;
     }
     public HomePage openCitySelection() {
         $x(citySelectionButton).click();
+        sleep(30000);
         return this;
     }
 }
