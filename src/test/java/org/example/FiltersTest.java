@@ -1,18 +1,24 @@
 package org.example;
 
 import cofig.WebDriverConfig;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pages.ElectronicsPage;
-import pages.FiltersPage;
-import pages.HomePage;
+import pages.*;
 
 import static com.codeborne.selenide.Selenide.*;
 
 public class FiltersTest {
-    HomePage homePage = new HomePage();
-    ElectronicsPage electronicsPage = new ElectronicsPage();
-    FiltersPage filtersPage = new FiltersPage();
+    private HomePage homePage;
+    private ElectronicsPage electronicsPage;
+    private FiltersPage filtersPage;
+    @BeforeMethod
+    public void setUp() {
+        WebDriverConfig.setUp();
 
+        homePage = new HomePage();
+        electronicsPage = new ElectronicsPage();
+        filtersPage = new FiltersPage();
+    }
     @Test
     public void testFilters() {
         WebDriverConfig.setUp();

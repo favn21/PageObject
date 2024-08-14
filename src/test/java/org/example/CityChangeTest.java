@@ -1,6 +1,7 @@
 package org.example;
 
 import cofig.WebDriverConfig;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.CartPage;
 import pages.CitySelectionPage;
@@ -8,14 +9,23 @@ import pages.HomePage;
 import pages.ProductPage;
 
 public class CityChangeTest {
-    HomePage homePage = new HomePage();
-    CitySelectionPage citySelectionPage = new CitySelectionPage();
-    ProductPage productPage = new ProductPage();
-    CartPage cartPage = new CartPage();
 
+    private HomePage homePage;
+    private CitySelectionPage citySelectionPage;
+    private ProductPage productPage;
+    private CartPage cartPage;
+
+    @BeforeMethod
+    public void setUp() {
+        WebDriverConfig.setUp();
+
+        homePage = new HomePage();
+        citySelectionPage = new CitySelectionPage();
+        productPage = new ProductPage();
+        cartPage = new CartPage();
+    }
     @Test
     public void testCityChange() {
-        WebDriverConfig.setUp();
         homePage.openPage()
             .openCitySelection();
 

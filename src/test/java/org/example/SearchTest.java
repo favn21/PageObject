@@ -1,15 +1,22 @@
 package org.example;
 
 import cofig.WebDriverConfig;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pages.FiltersBlock;
-import pages.HomePage;
-import pages.SearchResultsPage;
+import pages.*;
 
 public class SearchTest {
-    HomePage homePage = new HomePage();
-    SearchResultsPage searchResultsPage = new SearchResultsPage();
-    FiltersBlock filtersBlock = new FiltersBlock();
+    private HomePage homePage;
+    private SearchResultsPage searchResultsPage;
+    private FiltersBlock filtersBlock;
+    @BeforeMethod
+    public void setUp() {
+        WebDriverConfig.setUp();
+
+        homePage = new HomePage();
+        searchResultsPage = new SearchResultsPage();
+        filtersBlock = new FiltersBlock();
+    }
     @Test
     public void testSearch() {
         WebDriverConfig.setUp();
