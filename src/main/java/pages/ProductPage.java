@@ -9,26 +9,21 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class ProductPage {
 
-    private final String firstProductCard = ".product-card";
-    private final String productPrice = ".//ins[contains(@class, 'price__lower-price')]";
-    private final String productName = ".//span[contains(@class, 'product-card__name')]";
-    private final String addToBasketButton = "//button[@class='order__button btn-main']";
-
     public String selectFirstProductAndGetName() {
-        SelenideElement productCardLink = $$(firstProductCard).first().shouldBe(visible);
+        SelenideElement productCardLink = $$(".product-card").first().shouldBe(visible);
         productCardLink.scrollTo();
 
-        String name = productCardLink.$x(productName).getText();
+        String name = productCardLink.$x(".//span[contains(@class, 'product-card__name')]").getText();
         productCardLink.click();
         return name;
     }
 
     public String getFirstProductPrice() {
-        return $x(productPrice).getText().trim();
+        return $x(".//ins[contains(@class, 'price__lower-price')]").getText().trim();
     }
 
     public ProductPage addToBasket() {
-        SelenideElement addToBasketBtn = $x(addToBasketButton);
+        SelenideElement addToBasketBtn = $x("//button[@class='order__button btn-main']");
         ((JavascriptExecutor) WebDriverRunner.getWebDriver()).executeScript("arguments[0].scrollIntoView(true);", addToBasketBtn);
         ((JavascriptExecutor) WebDriverRunner.getWebDriver()).executeScript("arguments[0].click();", addToBasketBtn);
         return this;

@@ -1,7 +1,6 @@
 package org.example;
 
 import cofig.WebDriverConfig;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.CartPage;
 import pages.CitySelectionPage;
@@ -15,29 +14,24 @@ public class CityChangeTest {
     private ProductPage productPage;
     private CartPage cartPage;
 
-    @BeforeMethod
-    public void setUp() {
-        WebDriverConfig.setUp();
-
-        homePage = new HomePage();
-        citySelectionPage = new CitySelectionPage();
-        productPage = new ProductPage();
-        cartPage = new CartPage();
-    }
     @Test
     public void testCityChange() {
-        homePage.openPage()
-            .openCitySelection();
+        WebDriverConfig.setUp();
+        homePage = new HomePage();
+        homePage.openPage();
 
-
-        citySelectionPage.searchForCity("Санкт-Петербург")
+        citySelectionPage = new CitySelectionPage();
+        citySelectionPage.openCitySelection()
+                .searchForCity("Санкт-Петербург")
                 .selectFirstAddress()
                 .confirmCitySelection();
+        productPage = new ProductPage();
+
         String productPrice = productPage.getFirstProductPrice();
         String productName = productPage.selectFirstProductAndGetName();
-
         productPage.addToBasket();
 
+        cartPage = new CartPage();
         cartPage.verifyProductAddedToCart(1)
                 .openCart();
 
@@ -46,7 +40,6 @@ public class CityChangeTest {
         productName.equals(productNameInCart);
         productPrice.equals(productPriceInCart);
         String totalCartPrice = cartPage.getTotalCartPrice();
-
         cartPage.verifyOrderButtonVisibleAndEnabled();
 
     }

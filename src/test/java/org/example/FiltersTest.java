@@ -1,7 +1,6 @@
 package org.example;
 
 import cofig.WebDriverConfig;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.*;
 
@@ -11,24 +10,18 @@ public class FiltersTest {
     private HomePage homePage;
     private ElectronicsPage electronicsPage;
     private FiltersPage filtersPage;
-    @BeforeMethod
-    public void setUp() {
-        WebDriverConfig.setUp();
 
-        homePage = new HomePage();
-        electronicsPage = new ElectronicsPage();
-        filtersPage = new FiltersPage();
-    }
     @Test
     public void testFilters() {
         WebDriverConfig.setUp();
+        homePage = new HomePage();
         homePage.openPage()
             .openBurgerMenu();
-
+        electronicsPage= new ElectronicsPage();
         electronicsPage.selectElectronics()
                 .selectLaptops()
                 .selectUltrabooks();
-
+        filtersPage = new FiltersPage();
         filtersPage.openAllFilters()
                 .setPriceRange("100000", "149000")
                 .selectAppleBrand()

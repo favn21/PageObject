@@ -1,14 +1,10 @@
 package pages;
-import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Condition.empty;
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 
 public class HomePage {
-
-    private SelenideElement searchInput = $("#searchInput");
-    private final String burgerMenuButton = "button.nav-element__burger.j-menu-burger-btn.j-wba-header-item";
-    private final String citySelectionButton = "//span[@data-wba-header-name='DLV_Adress']";
 
     public HomePage openPage() {
         open("https://www.wildberries.ru/");
@@ -19,18 +15,27 @@ public class HomePage {
         return this;
     }
 
-    public SearchResultsPage searchForProduct(String productName) {
-        searchInput.setValue(productName).pressEnter();
-        return new SearchResultsPage();
+    public HomePage searchForProduct(String productName) {
+        $("#searchInput").setValue(productName).pressEnter();
+        return this;
     }
     public HomePage openBurgerMenu() {
-        $(burgerMenuButton).click();
-        sleep(10000);
+        $("button.nav-element__burger.j-menu-burger-btn.j-wba-header-item").click();
         return this;
     }
-    public HomePage openCitySelection() {
-        $x(citySelectionButton).click();
-        sleep(30000);
+    public HomePage verifyResultsContainText(String expectedText) {
+        $(".searching-results__title").shouldHave(text(expectedText));
         return this;
     }
+
+    public HomePage verifyFirstProductBrand(String expectedBrand) {
+        $$(".product-card__brand").first().shouldHave(text(expectedBrand));
+        return this;
+    }
+
+    public HomePage clearSearch() {
+        $(".search-catalog__btn.search-catalog__btn--clear.search-catalog__btn--active").click();
+        return new HomePage();
+    }
+
 }

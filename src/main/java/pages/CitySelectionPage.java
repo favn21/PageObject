@@ -4,23 +4,22 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class CitySelectionPage {
 
-    private final String searchInput = ".ymaps-2-1-79-searchbox-input__input";
-    private final String firstAddressOption = ".address-item.j-poo-option";
-    private final String selectButton = "button.details-self__btn.btn-main";
-
+    public CitySelectionPage openCitySelection() {
+        $x("//span[@data-wba-header-name='DLV_Adress']").click();
+        return new CitySelectionPage();
+    }
     public CitySelectionPage searchForCity(String cityName) {
-        $(searchInput).setValue(cityName).pressEnter();
-        sleep(20000);
+        $(".ymaps-2-1-79-searchbox-input__input").setValue(cityName).pressEnter();
         return this;
     }
 
     public CitySelectionPage selectFirstAddress() {
-        $$(firstAddressOption).first().click();
+        $(".address-item.j-poo-option").click();
         return this;
     }
 
     public CitySelectionPage confirmCitySelection() {
-        $(selectButton).click();
+        $("button.details-self__btn.btn-main").click();
         return this;
     }
 }

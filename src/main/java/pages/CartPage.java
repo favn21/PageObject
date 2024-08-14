@@ -5,37 +5,30 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class CartPage {
 
-    private final String cartNotification = "span.navbar-pc__notify";
-    private final String cartIcon = ".navbar-pc__icon--basket";
-    private final String productNameInCart = ".//span[contains(@class, 'good-info__good-name')]";
-    private final String productPriceInCart = "//div[contains(@class, 'list-item__price-new')]";
-    private final String totalCartPrice = "//span[contains(@data-link, 'basketPriceWithCurrencyV2')]";
-    private final String orderButton = "//button[@class='b-btn-do-order btn-main j-btn-confirm-order']";
-
     public CartPage openCart() {
-        $(cartIcon).click();
+        $(".navbar-pc__icon--basket").click();
         return this;
     }
 
     public String getProductNameInCart() {
-        return $x(productNameInCart).getText();
+        return $x(".//span[contains(@class, 'good-info__good-name')]").getText();
     }
 
     public String getProductPriceInCart() {
-        return $x(productPriceInCart).getText().trim();
+        return $x("//div[contains(@class, 'list-item__price-new')]").getText().trim();
     }
 
     public String getTotalCartPrice() {
-        return $x(totalCartPrice).getText().trim();
+        return $x("//span[contains(@data-link, 'basketPriceWithCurrencyV2')]").getText().trim();
     }
 
     public CartPage verifyOrderButtonVisibleAndEnabled() {
-        $x(orderButton).shouldBe(visible).shouldBe(enabled);
+        $x("//button[@class='b-btn-do-order btn-main j-btn-confirm-order']").shouldBe(visible).shouldBe(enabled);
         return this;
     }
 
     public CartPage verifyProductAddedToCart(int expectedItems) {
-        $(cartNotification).shouldHave(text(String.valueOf(expectedItems)));
+        $("span.navbar-pc__notify").shouldHave(text(String.valueOf(expectedItems)));
         return this;
     }
 }

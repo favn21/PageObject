@@ -5,43 +5,35 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
 public class FiltersPage {
-    private final String allFiltersButton = "button.dropdown-filter__btn.dropdown-filter__btn--all";
-    private final String priceMinInput = "//input[@name='startN']";
-    private final String priceMaxInput = "//input[@name='endN']";
-    private final String appleCheckbox = "//div[contains(@class, 'checkbox-with-text') and .//span[contains(text(), 'Apple')]]";
-    private final String deliveryCheckbox = "//span[contains(@class, 'radio-with-text__decor') and following-sibling::span[contains(text(), 'до 5 дней')]]";
-    private final String screenSizeCheckbox = "//span[contains(@class, 'checkbox-with-text__text') and contains(text(), '13.3')]";
-    private final String showButton = "//button[contains(@class, 'filters-desktop__btn-main') and contains(text(), 'Показать')]";
 
     public FiltersPage openAllFilters() {
-        $(allFiltersButton).click();
+        $("button.dropdown-filter__btn.dropdown-filter__btn--all").click();
         return this;
     }
 
     public FiltersPage setPriceRange(String minPrice, String maxPrice) {
-        $x(priceMinInput).setValue(minPrice);
-        $x(priceMaxInput).setValue(maxPrice);
+        $x("//input[@name='startN']").setValue(minPrice);
+        $x("//input[@name='endN']").setValue(maxPrice);
         return this;
     }
 
     public FiltersPage selectAppleBrand() {
-        $x(appleCheckbox).click();
+        $x("//div[contains(@class, 'checkbox-with-text') and .//span[contains(text(), 'Apple')]]").click();
         return this;
     }
 
     public FiltersPage selectDeliveryWithinFiveDays() {
-        $x(deliveryCheckbox).click();
-        sleep(10000);
+        $x("//span[contains(@class, 'radio-with-text__decor') and following-sibling::span[contains(text(), 'до 5 дней')]]").click();
         return this;
     }
 
     public FiltersPage selectScreenSize13_3() {
-        $x(screenSizeCheckbox).click();
+        $x("//span[contains(@class, 'checkbox-with-text__text') and contains(text(), '13.3')]").click();
         return this;
     }
 
     public FiltersPage applyFilters() {
-        $x(showButton).click();
+        $x("//button[contains(@class, 'filters-desktop__btn-main') and contains(text(), 'Показать')]").click();
         return this;
     }
 
