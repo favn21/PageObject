@@ -1,18 +1,23 @@
 package pages;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.*;
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideElement;
+
 
 public class FiltersBlock {
 
     public FiltersBlock verifyPopularityFilterIsVisible() {
-        $x("//button[contains(text(), 'По популярности')]").shouldBe(visible);
+        SelenideElement popularityFilterButton = Selenide.$x("//button[contains(text(), 'По популярности')]");
+        popularityFilterButton.shouldBe(Condition.visible);
         return this;
     }
 
     public FiltersBlock verifyFiltersBlockContainsText(String expectedText) {
-        $$(".catalog-page__filters-block").first().shouldHave(text(expectedText));
+        SelenideElement filterBlock = Selenide.$$(".catalog-page__filters-block").first();
+        filterBlock.shouldBe(Condition.visible);
+        filterBlock.shouldHave(Condition.text(expectedText));
+
         return this;
     }
 }

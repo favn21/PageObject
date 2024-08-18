@@ -1,41 +1,47 @@
 package pages;
 
-import static com.codeborne.selenide.Condition.empty;
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.*;
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideElement;
 
 public class HomePage {
 
     public HomePage openPage() {
-        open("https://www.wildberries.ru/");
+        Selenide.open("https://www.wildberries.ru/");
         return this;
     }
+
     public HomePage verifySearchFieldIsCleared() {
-        $("#searchInput").shouldBe(empty);
+        SelenideElement searchInput = Selenide.$("#searchInput");
+        searchInput.shouldHave(Condition.value(""));
         return this;
     }
 
     public HomePage searchForProduct(String productName) {
-        $("#searchInput").setValue(productName).pressEnter();
+        SelenideElement searchInput = Selenide.$("#searchInput");
+        searchInput.setValue(productName).pressEnter();
         return this;
     }
+
     public HomePage openBurgerMenu() {
-        $("button.nav-element__burger.j-menu-burger-btn.j-wba-header-item").click();
+        Selenide.$("button.nav-element__burger.j-menu-burger-btn.j-wba-header-item").click();
         return this;
     }
+
     public HomePage verifyResultsContainText(String expectedText) {
-        $(".searching-results__title").shouldHave(text(expectedText));
+        SelenideElement resultsTitle = Selenide.$(".searching-results__title");
+        resultsTitle.shouldHave(Condition.text(expectedText));
         return this;
     }
 
     public HomePage verifyFirstProductBrand(String expectedBrand) {
-        $$(".product-card__brand").first().shouldHave(text(expectedBrand));
+        SelenideElement firstProductBrand = Selenide.$$(".product-card__brand").first();
+        firstProductBrand.shouldHave(Condition.text(expectedBrand));
         return this;
     }
 
     public HomePage clearSearch() {
-        $(".search-catalog__btn.search-catalog__btn--clear.search-catalog__btn--active").click();
-        return new HomePage();
+        Selenide.$(".search-catalog__btn.search-catalog__btn--clear.search-catalog__btn--active").click();
+        return this;
     }
-
 }

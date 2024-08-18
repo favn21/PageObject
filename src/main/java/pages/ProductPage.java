@@ -1,25 +1,26 @@
 package pages;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import org.openqa.selenium.JavascriptExecutor;
 
-import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
 public class ProductPage {
 
     public String selectFirstProductAndGetName() {
-        SelenideElement productCardLink = $$(".product-card").first().shouldBe(visible);
-        productCardLink.scrollTo();
 
-        String name = productCardLink.$x(".//span[contains(@class, 'product-card__name')]").getText();
-        productCardLink.click();
-        return name;
+        SelenideElement firstProductCard = Selenide.$$(".product-card").first().shouldBe(Condition.visible);
+        firstProductCard.scrollIntoView(true);
+        String productName = firstProductCard.$x(".//span[contains(@class, 'product-card__name')]").getText();
+        firstProductCard.click();
+        return productName;
     }
 
     public String getFirstProductPrice() {
-        return $x(".//ins[contains(@class, 'price__lower-price')]").getText().trim();
+        return Selenide.$x(".//ins[contains(@class, 'price__lower-price')]").getText().trim();
     }
 
     public ProductPage addToBasket() {
