@@ -1,7 +1,6 @@
 package pages;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import org.openqa.selenium.JavascriptExecutor;
@@ -12,7 +11,7 @@ public class ProductPage {
 
     public String selectFirstProductAndGetName() {
 
-        SelenideElement firstProductCard = Selenide.$$(".product-card").first().shouldBe(Condition.visible);
+        SelenideElement firstProductCard = $$(".product-card").first().shouldBe(Condition.visible);
         firstProductCard.scrollIntoView(true);
         String productName = firstProductCard.$x(".//span[contains(@class, 'product-card__name')]").getText();
         firstProductCard.click();
@@ -20,13 +19,12 @@ public class ProductPage {
     }
 
     public String getFirstProductPrice() {
-        return Selenide.$x(".//ins[contains(@class, 'price__lower-price')]").getText().trim();
+        return $x(".//ins[contains(@class, 'price__lower-price')]").getText().trim();
     }
 
     public ProductPage addToBasket() {
-        SelenideElement addToBasketBtn = $x("//button[@class='order__button btn-main']");
-        ((JavascriptExecutor) WebDriverRunner.getWebDriver()).executeScript("arguments[0].scrollIntoView(true);", addToBasketBtn);
-        ((JavascriptExecutor) WebDriverRunner.getWebDriver()).executeScript("arguments[0].click();", addToBasketBtn);
+        ((JavascriptExecutor) WebDriverRunner.getWebDriver()).executeScript("arguments[0].scrollIntoView(true);", $x("//button[@class='order__button btn-main']"));
+        ((JavascriptExecutor) WebDriverRunner.getWebDriver()).executeScript("arguments[0].click();", $x("//button[@class='order__button btn-main']"));
         return this;
     }
 }
