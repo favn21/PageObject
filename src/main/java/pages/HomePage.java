@@ -1,17 +1,12 @@
 package pages;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
 public class HomePage {
-    public HomePage open() {
-        Selenide.open("/");
-        return this;
-    }
+
     public HomePage searchForProduct(String productName) {
         $("#searchInput").setValue(productName).pressEnter();
         return this;
@@ -26,6 +21,7 @@ public class HomePage {
         $(".search-catalog__btn.search-catalog__btn--clear.search-catalog__btn--active").click();
         return this;
     }
+
     public HomePage verifySearchFieldIsCleared() {
         $("#searchInput").shouldHave(Condition.value(""));
         return this;

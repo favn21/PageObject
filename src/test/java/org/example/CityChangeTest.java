@@ -3,35 +3,31 @@ package org.example;
 import org.testng.annotations.Test;
 import pages.*;
 
-
 public class CityChangeTest extends BaseClass{
     @Test
     public void testCityChange() {
 
-        CitySelectionPage citySelectionPage  = new CitySelectionPage();
-
-        citySelectionPage.openCitySelection()
+        new CitySelectionPage().openCitySelection()
                 .searchForCity("Санкт-Петербург")
                 .selectFirstAddress()
                 .confirmCitySelection();
-        ProductPage productPage = new ProductPage();
 
-        String productPrice = productPage.getFirstProductPrice();
-        String productName = productPage.selectFirstProductAndGetName();
 
-        productPage.addToBasket();
+        String productPrice = new ProductPage().getFirstProductPrice();
+        String productName = new ProductPage().selectFirstProductAndGetName();
 
-        CartPage cartPage = new CartPage();
-        cartPage.verifyProductAddedToCart(1)
+        new ProductPage().addToBasket();
+
+        new CartPage().verifyProductAddedToCart(1)
                 .openCart();
 
-        String productNameInCart = cartPage.getProductNameInCart();
-        String productPriceInCart = cartPage.getProductPriceInCart();
+        String productNameInCart = new CartPage().getProductNameInCart();
+        String productPriceInCart = new CartPage().getProductPriceInCart();
 
         productName.equals(productNameInCart);
         productPrice.equals(productPriceInCart);
 
-        String totalCartPrice = cartPage.getTotalCartPrice().toString();
-        cartPage.verifyOrderButtonVisibleAndEnabled();
+        String totalCartPrice = new CartPage().getTotalCartPrice().toString();
+        new CartPage().verifyOrderButtonVisibleAndEnabled();
     }
 }

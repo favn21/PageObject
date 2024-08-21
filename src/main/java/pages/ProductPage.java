@@ -10,7 +10,6 @@ import static com.codeborne.selenide.Selenide.*;
 public class ProductPage {
 
     public String selectFirstProductAndGetName() {
-
         SelenideElement firstProductCard = $$(".product-card").first().shouldBe(Condition.visible);
         firstProductCard.scrollIntoView(true);
         String productName = firstProductCard.$x(".//span[contains(@class, 'product-card__name')]").getText();
@@ -23,8 +22,9 @@ public class ProductPage {
     }
 
     public ProductPage addToBasket() {
-        ((JavascriptExecutor) WebDriverRunner.getWebDriver()).executeScript("arguments[0].scrollIntoView(true);", $x("//button[@class='order__button btn-main']"));
-        ((JavascriptExecutor) WebDriverRunner.getWebDriver()).executeScript("arguments[0].click();", $x("//button[@class='order__button btn-main']"));
+        SelenideElement addToBasketBtn = $x("//button[@class='order__button btn-main']");
+        ((JavascriptExecutor) WebDriverRunner.getWebDriver()).executeScript("arguments[0].scrollIntoView(true);", addToBasketBtn);
+        ((JavascriptExecutor) WebDriverRunner.getWebDriver()).executeScript("arguments[0].click();", addToBasketBtn);
         return this;
     }
 }

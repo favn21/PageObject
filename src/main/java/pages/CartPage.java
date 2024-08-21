@@ -20,9 +20,8 @@ public class CartPage {
         return $x("//div[contains(@class, 'list-item__price-new')]").getText().trim();
     }
 
-    public CartPage getTotalCartPrice() {
-        $x("//span[contains(@data-link, 'basketPriceWithCurrencyV2')]").getText().trim();
-        return this;
+    public String getTotalCartPrice() {
+        return $x("//span[contains(@data-link, 'basketPriceWithCurrencyV2')]").getText().trim();
     }
 
     public CartPage verifyOrderButtonVisibleAndEnabled() {

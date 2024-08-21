@@ -38,13 +38,14 @@ public class FiltersPage {
         return this;
     }
 
-    public  FiltersPage verifyFilterApplied(String filterText) {
+    public FiltersPage verifyFilterApplied(String filterText) {
         $x("//span[@class='your-choice__btn' and contains(text(), '" + filterText + "')]").shouldBe(Condition.visible);
         return this;
     }
 
-    public  int getTotalItemsCount() {
-        return Integer.parseInt($x("//span[contains(@class, 'goods-count')]/span").getText().replaceAll("[^0-9]", ""));
+    public int getTotalItemsCount() {
+        String totalItemsText = $x("//span[contains(@class, 'goods-count')]/span").getText();
+        return Integer.parseInt(totalItemsText.replaceAll("[^0-9]", ""));
     }
 
     public FiltersPage verifyTotalItemsCount(int expectedCount) {
@@ -56,5 +57,4 @@ public class FiltersPage {
         $x("//li[contains(@class, 'your-choice__item--reset')]//button[contains(@class, 'your-choice__btn') and contains(text(), 'Сбросить все')]").shouldBe(Condition.visible);
         return this;
     }
-
 }
