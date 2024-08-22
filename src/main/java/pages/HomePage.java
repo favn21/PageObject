@@ -2,8 +2,7 @@ package pages;
 
 import com.codeborne.selenide.Condition;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
+import static com.codeborne.selenide.Selenide.*;
 
 public class HomePage {
 
@@ -35,5 +34,11 @@ public class HomePage {
     public HomePage verifyFirstProductBrand(String expectedBrand) {
         $$(".product-card__brand").first().shouldHave(Condition.text(expectedBrand));
         return this;
+    }
+    public FiltersBlock navigateToFiltersBlock() {
+        return new FiltersBlock();
+    }
+    public ElectronicsPage navigateToElectronicsPage() {
+        return new ElectronicsPage();
     }
 }

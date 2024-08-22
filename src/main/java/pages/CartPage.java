@@ -2,8 +2,7 @@ package pages;
 
 import com.codeborne.selenide.Condition;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Selenide.*;
 
 public class CartPage {
 
@@ -35,5 +34,20 @@ public class CartPage {
         $("span.navbar-pc__notify").shouldHave(Condition.text(String.valueOf(expectedItems)));
         return this;
     }
+    public CartPage verifyProductDetailsInCart(String expectedProductName, String expectedProductPrice) {
+
+        String actualProductName = "/ " + getProductNameInCart();
+        String actualProductPrice = getProductPriceInCart();
+        if (!expectedProductName.equals(actualProductName)) {
+            throw new AssertionError("Название товаров не соответствует. Ожидаемое:" + expectedProductName + " Итоговое:" + actualProductName);
+        }
+
+        if (!expectedProductPrice.equals(actualProductPrice)) {
+            throw new AssertionError("Цена товаров не соответствует. Ожидаемая: " + expectedProductPrice + " Итоговая: " + actualProductPrice);
+        }
+
+        return this;
+    }
+
 }
 

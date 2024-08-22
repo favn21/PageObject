@@ -27,4 +27,8 @@ public class ProductPage {
         ((JavascriptExecutor) WebDriverRunner.getWebDriver()).executeScript("arguments[0].click();", addToBasketBtn);
         return this;
     }
+
+    public CartPage navigateToCartPage() {
+        return new CartPage();
+    }
 }

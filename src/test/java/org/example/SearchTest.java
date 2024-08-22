@@ -4,6 +4,7 @@ import org.testng.annotations.Test;
 import pages.*;
 
 public class SearchTest extends BaseClass {
+
     @Test
     public void testSearch() {
         new HomePage()
@@ -11,9 +12,8 @@ public class SearchTest extends BaseClass {
                 .verifyResultsContainText("Iphone 13")
                 .verifyFirstProductBrand("Apple")
                 .clearSearch()
-                .verifySearchFieldIsCleared();
-
-        new FiltersBlock()
+                .verifySearchFieldIsCleared()
+                .navigateToFiltersBlock()
                 .verifyFiltersBlockContainsText("По популярности")
                 .verifyPopularityFilterIsVisible();
     }

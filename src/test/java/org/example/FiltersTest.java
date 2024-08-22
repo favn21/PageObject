@@ -3,21 +3,18 @@ package org.example;
 import org.testng.annotations.Test;
 import pages.*;
 
-import static com.codeborne.selenide.Selenide.*;
-
 public class FiltersTest extends BaseClass {
 
     @Test
     public void testFilters() {
         new HomePage()
-                .openBurgerMenu();
-
-        new ElectronicsPage()
+                .openBurgerMenu()
+                .navigateToElectronicsPage()
                 .selectElectronics()
                 .selectLaptops()
-                .selectUltrabooks();
-
-        new FiltersPage().openAllFilters()
+                .selectUltrabooks()
+                .navigateToFiltersPage()
+                .openAllFilters()
                 .setPriceRange("100000", "149000")
                 .selectAppleBrand()
                 .selectDeliveryWithinFiveDays()
@@ -27,8 +24,7 @@ public class FiltersTest extends BaseClass {
                 .verifyFilterApplied("до 5 дней")
                 .verifyFilterApplied("13.3")
                 .verifyFilterApplied("Apple")
-                .verifyTotalItemsCount(new FiltersPage().getTotalItemsCount())
+                .verifyTotalItemsCount()
                 .verifyResetButtonVisible();
-
     }
 }

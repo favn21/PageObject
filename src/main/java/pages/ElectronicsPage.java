@@ -23,4 +23,7 @@ public class ElectronicsPage {
             .click();
         return this;
     }
+    public FiltersPage navigateToFiltersPage() {
+        return new FiltersPage();
+    }
 }

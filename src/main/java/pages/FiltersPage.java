@@ -48,7 +48,8 @@ public class FiltersPage {
         return Integer.parseInt(totalItemsText.replaceAll("[^0-9]", ""));
     }
 
-    public FiltersPage verifyTotalItemsCount(int expectedCount) {
+    public FiltersPage verifyTotalItemsCount() {
+        int expectedCount = new FiltersPage().getTotalItemsCount();
         $$("div.product-card__wrapper").shouldHave(CollectionCondition.size(expectedCount));
         return this;
     }
